@@ -1,36 +1,36 @@
 [submodule "Unity/Assets/Framework/NikAudio"]
 	path = Unity/Assets/Framework/NikAudio
-	url = git@github.com:niksg/niksg/NikAudio.git
+	url = git@github.com:niksg/NikAudio.git
 [submodule "Unity/Assets/Framework/NikBuild"]
 	path = Unity/Assets/Framework/NikBuild
-	url = git@github.com:niksg/niksg/NikBuild.git
+	url = git@github.com:niksg/NikBuild.git
 [submodule "Unity/Assets/Framework/NikCamera"]
 	path = Unity/Assets/Framework/NikCamera
-	url = git@github.com:niksg/niksg/NikCamera.git
+	url = git@github.com:niksg/NikCamera.git
 [submodule "Unity/Assets/Framework/NikComponents"]
 	path = Unity/Assets/Framework/NikComponents
-	url = git@github.com:niksg/niksg/NikComponents.git
+	url = git@github.com:niksg/NikComponents.git
 [submodule "Unity/Assets/Framework/NikControls"]
 	path = Unity/Assets/Framework/NikControls
-	url = git@github.com:niksg/niksg/NikControls.git
+	url = git@github.com:niksg/NikControls.git
 [submodule "Unity/Assets/Framework/NikDebug"]
 	path = Unity/Assets/Framework/NikDebug
-	url = git@github.com:niksg/niksg/NikDebug.git
+	url = git@github.com:niksg/NikDebug.git
 [submodule "Unity/Assets/Framework/NikDialogue"]
 	path = Unity/Assets/Framework/NikDialogue
-	url = git@github.com:niksg/niksg/NikDialogue.git
+	url = git@github.com:niksg/NikDialogue.git
 [submodule "Unity/Assets/Framework/NikFX"]
 	path = Unity/Assets/Framework/NikFX
-	url = git@github.com:niksg/niksg/NikFX.git
+	url = git@github.com:niksg/NikFX.git
 [submodule "Unity/Assets/Framework/NikNavigation"]
 	path = Unity/Assets/Framework/NikNavigation
-	url = git@github.com:niksg/niksg/NikNavigation.git
+	url = git@github.com:niksg/NikNavigation.git
 [submodule "Unity/Assets/Framework/NikParticles"]
 	path = Unity/Assets/Framework/NikParticles
-	url = git@github.com:niksg/niksg/NikParticles.git
+	url = git@github.com:niksg/NikParticles.git
 [submodule "Unity/Assets/Framework/NikUI"]
 	path = Unity/Assets/Framework/NikUI
-	url = git@github.com:niksg/niksg/NikUI.git
+	url = git@github.com:niksg/NikUI.git
 [submodule "Unity/Assets/Framework/NikUtils"]
 	path = Unity/Assets/Framework/NikUtils
-	url = git@github.com:niksg/niksg/NikUtils.git
+	url = git@github.com:niksg/NikUtils.git
