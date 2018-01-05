@@ -1,0 +1,19 @@
+{
+	"folders":
+	[
+		{
+			"path": "Unity/Assets/Framework",
+			"file_exclude_patterns":
+			[
+				"*.meta"
+			]
+		},
+		{
+			"path": "Unity/Assets/Scripts",
+			"file_exclude_patterns":
+			[
+				"*.meta"
+			]
+		}
+	]
+}
