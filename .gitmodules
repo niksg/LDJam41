@@ -34,3 +34,6 @@
 [submodule "Unity/Assets/Framework/NikUtils"]
 	path = Unity/Assets/Framework/NikUtils
 	url = git@github.com:niksg/NikUtils.git
+[submodule "Unity/Assets/Framework/NikCore"]
+	path = Unity/Assets/Framework/NikCore
+	url = git@github.com:niksg/NikCore.git
