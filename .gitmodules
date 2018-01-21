@@ -37,3 +37,6 @@
 [submodule "Unity/Assets/Framework/NikCore"]
 	path = Unity/Assets/Framework/NikCore
 	url = git@github.com:niksg/NikCore.git
+[submodule "Unity/Assets/Framework/NikArt"]
+	path = Unity/Assets/Framework/NikArt
+	url = git@github.com:niksg/NikArt.git
