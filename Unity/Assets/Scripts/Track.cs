@@ -100,9 +100,11 @@
 
 		public void UpdateTrack(float dt) {
 
-			foreach (ITrackCommand tc in this.TrackCommands) {
+			for (int i = this.TrackCommands.Count-1; i >= 0; i--) {
+				ITrackCommand tc = this.TrackCommands[i];
 				tc.UpdateTrackCommand(dt);
 				SetCommandPosition(tc);
+				CheckFailure(tc);
 			}
 		}
 
@@ -113,7 +115,7 @@
 
 		public InputResponse OnButtonDown(ControlButton button) {
 
-			if (button != this.Button) {
+			if (button.Type != this.Button.Type) {
 				return InputResponse.None;
 			}
 
@@ -123,8 +125,6 @@
 					HitCommand(tc);
 				} else if (tc.Progress < this.MissValue) {
 					MissedCommand(tc);
-				} else if (tc.Progress > this.EarlyGrace && tc.Progress < this.Activatable) {
-					FailedCommand(tc);
 				}
 			}
 
@@ -166,7 +166,14 @@
 				tc.Position = Vector2.Lerp(this.TrackStart.position, this.TrackEnd.position, tc.Progress);
 			}
 			else {
-				tc.Position = Vector2.Lerp(this.TrackStart.position, -this.TrackEnd.position, tc.Progress);
+				tc.Position = Vector2.Lerp(this.TrackStart.position - (this.TrackEnd.position - this.TrackStart.position), this.TrackStart.position, tc.Progress + 1.0f);
+			}
+		}
+
+		private void CheckFailure(ITrackCommand tc) {
+			
+			if (tc.Progress < this.LateGrace) {
+				FailedCommand(tc);
 			}
 		}
 
@@ -179,6 +186,7 @@
 			if (command.IsHold) {
 				this.HeldCommand = command;
 			} else {
+				command.Hit();
 				this.TrackCommands.Remove(command);
 			}
 		}
@@ -188,14 +196,16 @@
 			if (this.OnMiss != null) {
 				OnMiss(this, command);
 			}
+			command.Miss();
 			this.TrackCommands.Remove(command);
 		}
 
 		private void FailedCommand(ITrackCommand command) {
-			
+
 			if (this.OnFail != null) {
 				OnFail(this, command);
 			}
+			command.Fail();
 			this.TrackCommands.Remove(command);
 		}
 

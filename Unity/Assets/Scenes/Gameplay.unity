@@ -156,12 +156,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Button:
-    m_Type: 6
+    m_Type: 2
   TrackStart: {fileID: 983927458}
   TrackEnd: {fileID: 2124797772}
   Activatable: 0.2
   EarlyGrace: 0.05
-  LateGrace: -0.1
+  LateGrace: -0.25
   MissValue: -0.5
 --- !u!1 &339455197
 GameObject:
@@ -362,6 +362,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CommandManager: {fileID: 439497255}
+  m_Speed: 1
+  m_Rate: 1
   Track1: {fileID: 1093683355}
   Track2: {fileID: 670913224}
   Track3: {fileID: 58024533}
@@ -450,12 +452,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Button:
-    m_Type: 7
+    m_Type: 3
   TrackStart: {fileID: 1313588329}
   TrackEnd: {fileID: 918851693}
   Activatable: 0.2
   EarlyGrace: 0.05
-  LateGrace: -0.1
+  LateGrace: -0.25
   MissValue: -0.5
 --- !u!1 &670913222
 GameObject:
@@ -500,12 +502,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Button:
-    m_Type: 5
+    m_Type: 1
   TrackStart: {fileID: 940102556}
   TrackEnd: {fileID: 686832234}
   Activatable: 0.2
   EarlyGrace: 0.05
-  LateGrace: -0.1
+  LateGrace: -0.25
   MissValue: -0.5
 --- !u!1 &686832233
 GameObject:
@@ -634,7 +636,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &998705045
 Transform:
   m_ObjectHideFlags: 0
@@ -706,12 +708,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Button:
-    m_Type: 4
+    m_Type: 0
   TrackStart: {fileID: 2116103014}
   TrackEnd: {fileID: 1757893727}
   Activatable: 0.2
   EarlyGrace: 0.05
-  LateGrace: -0.1
+  LateGrace: -0.25
   MissValue: -0.5
 --- !u!1 &1313588328
 GameObject:

@@ -32,5 +32,6 @@ namespace LDJam41 {
 
 		void Miss();
 		void Hit();
+		void Fail();
 	}
 }

@@ -94,15 +94,15 @@
 		}
 
 		public void Miss() {
-
+			gameObject.SetActive(false);
 		}
 
 		public void Hit() {
-
+			gameObject.SetActive(false);
 		}
 
 		public void Fail() {
-
+			gameObject.SetActive(false);
 		}
 
 		#endregion

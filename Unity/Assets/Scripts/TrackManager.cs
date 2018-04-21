@@ -14,8 +14,16 @@
 		[SerializeField]
 		public CommandManager CommandManager;
 
+		[Header("Difficulty")]
+
+		[SerializeField]
+		private float m_Speed;
+
+		[SerializeField]
+		private float m_Rate;
+
 		[Header("Tracks")]
-		
+
 		[SerializeField]
 		public Track Track1;
 
@@ -46,7 +54,16 @@
 		#region Private Properties
 
 		private float Speed {
-			get { return 1.0f; }
+			get { return m_Speed; }
+		}
+
+		private float Rate {
+			get { return m_Rate; }
+		}
+
+		private float TotalTime {
+			get;
+			set;
 		}
 
 		#endregion
@@ -63,10 +80,13 @@
 
 		private void Update() {
 
+			this.TotalTime += Time.deltaTime;
+
 			UpdateTracks();
 
-			if (Input.GetKeyDown("f")) {
-				this.Tracks[Random.Range(0, this.Tracks.Count)].Add(this.CommandManager.GetRandomCommand());
+			if (this.TotalTime > this.Rate) {
+				this.TotalTime -= this.Rate;
+				SpawnCommand();
 			}
 		}
 
@@ -87,6 +107,11 @@
 			foreach (Track track in this.Tracks) {
 				track.UpdateTrack(Time.deltaTime * this.Speed);
 			}
+		}
+
+		private void SpawnCommand() {
+			
+			this.Tracks[Random.Range(0, this.Tracks.Count)].Add(this.CommandManager.GetRandomCommand());
 		}
 
 		private void AddCombo(Combo combo) {
