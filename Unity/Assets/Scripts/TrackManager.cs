@@ -9,6 +9,13 @@
 
 		#region Serialized Fields
 
+		[Header("Managers")]
+
+		[SerializeField]
+		public CommandManager CommandManager;
+
+		[Header("Tracks")]
+		
 		[SerializeField]
 		public Track Track1;
 
@@ -57,6 +64,10 @@
 		private void Update() {
 
 			UpdateTracks();
+
+			if (Input.GetKeyDown("f")) {
+				this.Tracks[Random.Range(0, this.Tracks.Count)].Add(this.CommandManager.GetRandomCommand());
+			}
 		}
 
 		#endregion

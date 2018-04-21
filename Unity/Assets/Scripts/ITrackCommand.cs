@@ -12,6 +12,7 @@ namespace LDJam41 {
 
 		float Progress {
 			get;
+			set;
 		}
 
 		bool IsHold {
@@ -19,6 +20,10 @@ namespace LDJam41 {
 		}
 
 		float Duration {
+			get;
+		}
+
+		GameObject GameObject {
 			get;
 		}
 

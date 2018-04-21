@@ -21,8 +21,20 @@
 
 		#region Serialized Fields
 
+		[Header("Button")]
+
 		[SerializeField]
 		public ControlButton Button;
+
+		[Header("Limits")]
+
+		[SerializeField]
+		public Transform TrackStart;
+
+		[SerializeField]
+		public Transform TrackEnd;
+
+		[Header("Activation")]
 
 		[SerializeField]
 		[Range(0, 0.5f)]
@@ -63,7 +75,7 @@
 		public bool IsHoldingCommand {
 			get { return this.HeldCommand != null; }
 		}
-		
+
 		#endregion
 
 
@@ -90,6 +102,7 @@
 
 			foreach (ITrackCommand tc in this.TrackCommands) {
 				tc.UpdateTrackCommand(dt);
+				SetCommandPosition(tc);
 			}
 		}
 
@@ -136,13 +149,26 @@
 
 		public void Add(ITrackCommand command) {
 
+			command.GameObject.transform.parent = transform;
+			command.Progress = 1.0f;
 			this.TrackCommands.Add(command);
+			SetCommandPosition(command);
 		}
 
 		#endregion
 
 
 		#region Private Methods
+
+		private void SetCommandPosition(ITrackCommand tc) {
+
+			if (tc.Progress >= 0) {
+				tc.Position = Vector2.Lerp(this.TrackStart.position, this.TrackEnd.position, tc.Progress);
+			}
+			else {
+				tc.Position = Vector2.Lerp(this.TrackStart.position, -this.TrackEnd.position, tc.Progress);
+			}
+		}
 
 		private void HitCommand(ITrackCommand command) {
 

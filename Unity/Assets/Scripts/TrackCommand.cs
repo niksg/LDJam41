@@ -36,7 +36,7 @@
 
 		public float Progress {
 			get;
-			private set;
+			set;
 		}
 
 		public bool IsHold {
@@ -46,7 +46,11 @@
 		public float Duration {
 			get { return m_Duration; }
 		}
-		
+
+		public GameObject GameObject {
+			get { return gameObject; }
+		}
+
 		#endregion
 
 
@@ -94,6 +98,10 @@
 		}
 
 		public void Hit() {
+
+		}
+
+		public void Fail() {
 
 		}
 
