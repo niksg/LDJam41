@@ -11,6 +11,12 @@
 		#region Serialize Fields
 
 		[SerializeField]
+		private bool m_IsHold;
+
+		[SerializeField]
+		private float m_Duration;
+		
+		[SerializeField]
 		public List<ControlButton> HeldButtons;
 
 		#endregion
@@ -33,6 +39,14 @@
 			private set;
 		}
 
+		public bool IsHold {
+			get { return m_IsHold; }
+		}
+
+		public float Duration {
+			get { return m_Duration; }
+		}
+		
 		#endregion
 
 

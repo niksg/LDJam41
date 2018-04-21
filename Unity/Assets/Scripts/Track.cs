@@ -12,15 +12,33 @@
 
         public System.Action<Track, ITrackCommand> OnHit;
 		public System.Action<Track, ITrackCommand> OnMiss;
+		public System.Action<Track, ITrackCommand> OnFail;
+		public System.Action<Track, ITrackCommand> OnHoldBegan;
+		public System.Action<Track, ITrackCommand> OnHoldEnded;
 
         #endregion
-
 
 
 		#region Serialized Fields
 
 		[SerializeField]
 		public ControlButton Button;
+
+		[SerializeField]
+		[Range(0, 0.5f)]
+		private float Activatable;
+
+		[SerializeField]
+		[Range(0, 0.5f)]
+		private float EarlyGrace;
+
+		[SerializeField]
+		[Range(-.5f, 0)]
+		private float LateGrace;
+
+		[SerializeField]
+		[Range(-1, 0)]
+		private float MissValue;
 
 		#endregion
 
@@ -42,25 +60,18 @@
 			get { return this.TrackCommands.Count == 0; }
 		}
 
+		public bool IsHoldingCommand {
+			get { return this.HeldCommand != null; }
+		}
+		
 		#endregion
 
 
 		#region Private Properties
 
-		private float Activatable {
-			get { return 0.15f; }
-		}
-
-		private float EarlyGrace {
-			get { return 0.05f; }
-		}
-		
-		private float LateGrace {
-			get { return -0.1f; }
-		}
-
-		private float MissValue {
-			get { return -0.5f; }
+		private ITrackCommand HeldCommand {
+			get;
+			set;
 		}
 
 		#endregion
@@ -100,15 +111,22 @@
 				} else if (tc.Progress < this.MissValue) {
 					MissedCommand(tc);
 				} else if (tc.Progress > this.EarlyGrace && tc.Progress < this.Activatable) {
-					MissedCommand(tc);
+					FailedCommand(tc);
 				}
 			}
 
-			return InputResponse.None;
+			return InputResponse.TrackAndSwallow;
 		}
 
 		public void OnButtonUp(ControlButton button) {
 			
+			if (this.HeldCommand != null) {
+				if (this.OnHoldEnded != null) {
+					OnHoldEnded(this, this.HeldCommand);
+				}
+				this.TrackCommands.Remove(this.HeldCommand);
+				this.HeldCommand = null;
+			}
 		}
 
 		#endregion
@@ -131,13 +149,26 @@
 			if (this.OnHit != null) {
 				OnHit(this, command);
 			}
-			this.TrackCommands.Remove(command);
+
+			if (command.IsHold) {
+				this.HeldCommand = command;
+			} else {
+				this.TrackCommands.Remove(command);
+			}
 		}
 
 		private void MissedCommand(ITrackCommand command) {
 			
 			if (this.OnMiss != null) {
 				OnMiss(this, command);
+			}
+			this.TrackCommands.Remove(command);
+		}
+
+		private void FailedCommand(ITrackCommand command) {
+			
+			if (this.OnFail != null) {
+				OnFail(this, command);
 			}
 			this.TrackCommands.Remove(command);
 		}

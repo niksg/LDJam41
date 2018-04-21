@@ -14,6 +14,14 @@ namespace LDJam41 {
 			get;
 		}
 
+		bool IsHold {
+			get;
+		}
+
+		float Duration {
+			get;
+		}
+
 		void UpdateTrackCommand(float dt);
 		bool Check(params ControlButton[] heldButtons);
 
