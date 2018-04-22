@@ -86,7 +86,10 @@
 			if (this.CurrentCombo == null) {
 				this.CurrentCombo = this.ComboManager.GetCombo(this.Level);
 			}
-
+			if (this.Index >= this.CurrentCombo.Length) {
+				this.CurrentCombo = this.ComboManager.GetCombo(this.Level);
+			}
+			
 			string nextLetter = this.CurrentCombo[this.Index].ToString();
 			this.Index++;
 

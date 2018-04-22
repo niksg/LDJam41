@@ -20,6 +20,9 @@
 		[Header("Managers")]
 		
 		[SerializeField]
+		public AudioManager AudioManager;
+
+		[SerializeField]
 		public TrackManager TrackManager;
 
 		[SerializeField]
@@ -57,6 +60,8 @@
 
 		private void OnEnable() {
 
+			this.AudioManager.OnMusicStarted += SubscribeToBeats;
+
 			foreach (Track t in this.TrackManager.Tracks) {
 				t.OnHit += OnHit;
 				t.OnMistimed += OnHit;
@@ -65,6 +70,40 @@
 			}
 
 			this.CharacterManager.OnCharacterKnockout += EndRound;
+		}
+
+		private void Start() {
+
+			this.AudioManager.PlayMusic(3.0f);
+		}
+
+		private void Update() {
+
+			this.AudioManager.UpdateAudioManager();
+
+			if (!this.RoundOver) {
+				// UpdateCommandSpawning();
+				this.TrackManager.UpdateTrackManager();
+			}
+
+			this.CharacterManager.UpdateCharacterManager();
+		}
+
+		#endregion
+
+
+		#region Private Methods
+
+		private void SubscribeToBeats() {
+
+			this.AudioManager.OnMusicBeat += OnBeat;
+		}
+
+		private void OnBeat() {
+
+			if (!this.RoundOver) {
+				SpawnCommand();
+			}
 		}
 
 		private void OnHit(Track track, TrackCommand trackCommand) {
@@ -81,21 +120,6 @@
 
 			this.CharacterManager.EnemyStrike();
 		}
-
-		private void Update() {
-			
-			if (!this.RoundOver) {
-				UpdateCommandSpawning();
-				this.TrackManager.UpdateTrackManager();
-			}
-
-			this.CharacterManager.UpdateCharacterManager();
-		}
-
-		#endregion
-
-
-		#region Private Methods
 
 		private void UpdateCommandSpawning() {
 			
