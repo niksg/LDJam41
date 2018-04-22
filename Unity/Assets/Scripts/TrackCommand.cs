@@ -7,7 +7,7 @@
 	using NikInput;
 	using NikUtils;
 
-	public class TrackCommand : MonoBehaviour, ITrackCommand {
+	public class TrackCommand : MonoBehaviour {
 
 		#region Serialize Fields
 

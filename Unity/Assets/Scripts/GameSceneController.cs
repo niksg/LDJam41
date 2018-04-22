@@ -51,17 +51,17 @@
 			}
 		}
 
-		private void OnHit(Track track, ITrackCommand trackCommand) {
+		private void OnHit(Track track, TrackCommand trackCommand) {
 
 			this.CharacterManager.PlayerStrike();
 		}
 
-		private void OnMiss(Track track, ITrackCommand trackCommand) {
+		private void OnMiss(Track track, TrackCommand trackCommand) {
 
 			this.CharacterManager.EnemyStrike();
 		}
 
-		private void OnFail(Track track, ITrackCommand trackCommand) {
+		private void OnFail(Track track, TrackCommand trackCommand) {
 
 			this.CharacterManager.EnemyStrike();
 		}

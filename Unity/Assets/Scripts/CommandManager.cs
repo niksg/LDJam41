@@ -9,10 +9,10 @@
 
 		#region Serialized Fields
 
-		public List<ITrackCommand> ITrackCommands {
+		public List<TrackCommand> TrackCommands {
 	       get {
-		      m_ITrackCommands = m_ITrackCommands ?? new List<ITrackCommand>(GetComponentsInChildren<ITrackCommand>(true));
-		      return m_ITrackCommands;
+		      m_TrackCommands = m_TrackCommands ?? new List<TrackCommand>(GetComponentsInChildren<TrackCommand>(true));
+		      return m_TrackCommands;
 	       }
         }
 
@@ -35,7 +35,7 @@
 
 		#region Fields
 
-		private List<ITrackCommand> m_ITrackCommands;
+		private List<TrackCommand> m_TrackCommands;
 
         #endregion
 
@@ -49,12 +49,12 @@
 
 		#region Public Methods
 
-		public ITrackCommand GetRandomCommand() {
+		public TrackCommand GetRandomCommand() {
 
-			GameObject tcObject = Instantiate(this.ITrackCommands[Random.Range(0, this.ITrackCommands.Count)].GameObject) as GameObject;
+			GameObject tcObject = Instantiate(this.TrackCommands[Random.Range(0, this.TrackCommands.Count)].GameObject) as GameObject;
 			tcObject.SetActive(true);
 			
-			return tcObject.GetComponent<ITrackCommand>();
+			return tcObject.GetComponent<TrackCommand>();
 		}
 
 		#endregion

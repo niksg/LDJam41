@@ -9,7 +9,7 @@
 	[Serializable]
 	public class Combo {
 		
-		public List<ITrackCommand> ComboCommands;
+		public List<TrackCommand> ComboCommands;
 	}
 
 	public class ComboManager : MonoBehaviour {

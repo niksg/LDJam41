@@ -10,11 +10,11 @@
 
 		#region Actions
 
-        public System.Action<Track, ITrackCommand> OnHit;
-		public System.Action<Track, ITrackCommand> OnMiss;
-		public System.Action<Track, ITrackCommand> OnFail;
-		public System.Action<Track, ITrackCommand> OnHoldBegan;
-		public System.Action<Track, ITrackCommand> OnHoldEnded;
+        public System.Action<Track, TrackCommand> OnHit;
+		public System.Action<Track, TrackCommand> OnMiss;
+		public System.Action<Track, TrackCommand> OnFail;
+		public System.Action<Track, TrackCommand> OnHoldBegan;
+		public System.Action<Track, TrackCommand> OnHoldEnded;
 
         #endregion
 
@@ -57,9 +57,9 @@
 
 		#region Public Properties
 
-		public List<ITrackCommand> TrackCommands {
+		public List<TrackCommand> TrackCommands {
 			get {
-				m_TrackCommands = m_TrackCommands ?? new List<ITrackCommand>();
+				m_TrackCommands = m_TrackCommands ?? new List<TrackCommand>();
 				return m_TrackCommands;
 			}
 		}
@@ -81,7 +81,7 @@
 
 		#region Private Properties
 
-		private ITrackCommand HeldCommand {
+		private TrackCommand HeldCommand {
 			get;
 			set;
 		}
@@ -91,7 +91,7 @@
 
 		#region Fields
 
-		List<ITrackCommand> m_TrackCommands;
+		List<TrackCommand> m_TrackCommands;
 
 		#endregion
 
@@ -101,7 +101,7 @@
 		public void UpdateTrack(float dt) {
 
 			for (int i = this.TrackCommands.Count-1; i >= 0; i--) {
-				ITrackCommand tc = this.TrackCommands[i];
+				TrackCommand tc = this.TrackCommands[i];
 				tc.UpdateTrackCommand(dt);
 				SetCommandPosition(tc);
 				CheckFailure(tc);
@@ -120,7 +120,7 @@
 			}
 
 			for (int i = this.TrackCommands.Count-1; i >= 0; i--) {
-				ITrackCommand tc = this.TrackCommands[i];
+				TrackCommand tc = this.TrackCommands[i];
 				if (tc.Progress < this.EarlyGrace && tc.Progress > this.LateGrace) {
 					HitCommand(tc);
 				} else if (tc.Progress < this.MissValue) {
@@ -147,7 +147,7 @@
 
 		#region Public Methods
 
-		public void Add(ITrackCommand command) {
+		public void Add(TrackCommand command) {
 
 			command.GameObject.transform.parent = transform;
 			command.Progress = 1.0f;
@@ -160,7 +160,7 @@
 
 		#region Private Methods
 
-		private void SetCommandPosition(ITrackCommand tc) {
+		private void SetCommandPosition(TrackCommand tc) {
 
 			Vector2 targetPos;
 			if (tc.Progress >= 0) {
@@ -173,14 +173,14 @@
 			tc.Position += (targetPos - tc.Position) * 0.2f;
 		}
 
-		private void CheckFailure(ITrackCommand tc) {
+		private void CheckFailure(TrackCommand tc) {
 			
 			if (tc.Progress < this.LateGrace) {
 				FailedCommand(tc);
 			}
 		}
 
-		private void HitCommand(ITrackCommand command) {
+		private void HitCommand(TrackCommand command) {
 
 			if (this.OnHit != null) {
 				OnHit(this, command);
@@ -194,7 +194,7 @@
 			}
 		}
 
-		private void MissedCommand(ITrackCommand command) {
+		private void MissedCommand(TrackCommand command) {
 			
 			if (this.OnMiss != null) {
 				OnMiss(this, command);
@@ -203,7 +203,7 @@
 			this.TrackCommands.Remove(command);
 		}
 
-		private void FailedCommand(ITrackCommand command) {
+		private void FailedCommand(TrackCommand command) {
 
 			if (this.OnFail != null) {
 				OnFail(this, command);
