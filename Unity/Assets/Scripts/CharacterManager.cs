@@ -16,7 +16,14 @@
 
 		#region Public Properties
 
+		public List<HealthBar> HealthBars {
+	       get {
+		      m_HealthBars = m_HealthBars ?? new List<HealthBar>(GetComponentsInChildren<HealthBar>());
+		      return m_HealthBars;
+	       }
+        }
 
+        private List<HealthBar> m_HealthBars;
 
 		#endregion
 
@@ -30,7 +37,12 @@
 
 		#region Monobehaviour
 
+		public void UpdateCharacterManager() {
 
+			foreach (HealthBar hb in this.HealthBars) {
+				hb.UpdateHealthBar();
+			}
+		}
 
 		#endregion
 

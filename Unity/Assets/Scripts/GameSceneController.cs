@@ -19,7 +19,7 @@
 
 		[SerializeField]
 		public CharacterManager CharacterManager;
-
+		
 		#endregion
 
 
@@ -68,26 +68,24 @@
 
 		private void Update() {
 			
-			this.TotalTime += Time.deltaTime;
-			if (this.TotalTime >= this.Rate) {
-				this.TotalTime -= this.Rate;
-				SpawnCommand();
-			}
-
+			UpdateCommandSpawning();
 			this.TrackManager.UpdateTrackManager();
+			this.CharacterManager.UpdateCharacterManager();
 		}
 
 		#endregion
 
 
-		#region Public Methods
-
-
-
-		#endregion
-
-
 		#region Private Methods
+
+		private void UpdateCommandSpawning() {
+			
+			this.TotalTime += Time.deltaTime;
+			if (this.TotalTime >= this.Rate) {
+				this.TotalTime -= this.Rate;
+				SpawnCommand();
+			}
+		}
 
 		private void SpawnCommand() {
 
