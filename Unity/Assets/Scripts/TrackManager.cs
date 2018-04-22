@@ -9,13 +9,15 @@
 
 		#region Serialized Fields
 
+		[Header("Audio Manager")]
+
+		[SerializeField]
+		public AudioManager AudioManager;
+
 		[Header("Difficulty")]
 
 		[SerializeField]
-		private float m_Speed;
-
-		[SerializeField]
-		private float m_Rate;
+		private int m_Speed;
 
 		[Header("Tracks")]
 
@@ -43,11 +45,7 @@
 		#region Private Properties
 
 		private float Speed {
-			get { return m_Speed; }
-		}
-
-		private float Rate {
-			get { return m_Rate; }
+			get { return (this.AudioManager.BPM / 60.0f) * (1.0f / m_Speed); }
 		}
 
 		#endregion
@@ -75,7 +73,7 @@
 		private void UpdateTracks() {
 			
 			foreach (Track track in this.Tracks) {
-				track.UpdateTrack(Time.fixedDeltaTime * this.Speed);
+				track.UpdateTrack(Time.deltaTime * this.Speed);
 			}
 		}
 

@@ -1066,8 +1066,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d53d297538c645269b787735bfeb2cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Speed: 0.75
-  m_Rate: 0.5
+  m_Speed: 1.3
   Track1: {fileID: 669252906}
   Track2: {fileID: 1263047318}
 --- !u!1 &433080836
@@ -5296,6 +5295,11 @@ Prefab:
       propertyPath: JiggleForce
       value: 0.7
       objectReference: {fileID: 0}
+    - target: {fileID: 114047223458693382, guid: b745af6f9f5034d41932473a1ef5a5f0,
+        type: 2}
+      propertyPath: m_MaxHealth
+      value: 555
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b745af6f9f5034d41932473a1ef5a5f0, type: 2}
   m_IsPrefabParent: 0
@@ -5932,6 +5936,11 @@ Prefab:
         type: 2}
       propertyPath: JiggleForce
       value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 114047223458693382, guid: b745af6f9f5034d41932473a1ef5a5f0,
+        type: 2}
+      propertyPath: m_MaxHealth
+      value: 555
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b745af6f9f5034d41932473a1ef5a5f0, type: 2}
@@ -11084,7 +11093,7 @@ AudioSource:
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
