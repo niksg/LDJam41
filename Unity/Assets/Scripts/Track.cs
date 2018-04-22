@@ -24,7 +24,7 @@
 		[Header("Button")]
 
 		[SerializeField]
-		public ControlButton Button;
+		public ControlButtonType ModifierKey;
 
 		[Header("Limits")]
 
@@ -118,20 +118,26 @@
 
 		public InputResponse OnButtonDown(ControlButton button) {
 
-			if (button.Type != this.Button.Type) {
-				return InputResponse.None;
-			}
+			Debug.Log("Button Down: " + button.Type);
 
 			for (int i = this.TrackCommands.Count-1; i >= 0; i--) {
 				TrackCommand tc = this.TrackCommands[i];
 				if (tc.Progress < this.EarlyGrace && tc.Progress > this.LateGrace) {
+					if (tc.Type != button.Type) {
+						FailedCommand(tc);
+						return InputResponse.None;
+					}
 					HitCommand(tc);
 				} else if (tc.Progress < this.MissValue) {
+					if (tc.Type != button.Type) {
+						FailedCommand(tc);
+						return InputResponse.None;
+					}
 					MissedCommand(tc);
 				}
 			}
 
-			return InputResponse.TrackAndSwallow;
+			return InputResponse.None;
 		}
 
 		public void OnButtonUp(ControlButton button) {
@@ -189,21 +195,17 @@
 		}
 
 		private void HitCommand(TrackCommand command) {
-
+Debug.Log("HitCommand");
 			if (this.OnHit != null) {
 				OnHit(this, command);
 			}
 
-			if (command.IsHold) {
-				this.HeldCommand = command;
-			} else {
-				command.Hit();
-				this.TrackCommands.Remove(command);
-			}
+			command.Hit();
+			this.TrackCommands.Remove(command);
 		}
 
 		private void MissedCommand(TrackCommand command) {
-			
+			Debug.Log("MissedCommand");
 			if (this.OnMiss != null) {
 				OnMiss(this, command);
 			}
@@ -212,7 +214,7 @@
 		}
 
 		private void FailedCommand(TrackCommand command) {
-
+Debug.Log("FailedCommand");
 			if (this.OnFail != null) {
 				OnFail(this, command);
 			}

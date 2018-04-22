@@ -4,6 +4,7 @@
 	using System.Collections;
 	using System.Collections.Generic;
 	using NikCore;
+	using NikInput;
 
 	public class CommandManager : MonoBehaviour {
 
@@ -62,6 +63,7 @@
 			Poolable poolable = this.Pool.Get();
 			TrackCommand tc = poolable.GetComponent<TrackCommand>();
 			tc.Reset();
+			tc.Init((ControlButtonType)Random.Range(0, 26));
 			return tc;
 			// GameObject tcObject = Instantiate(this.TrackCommands[Random.Range(0, this.TrackCommands.Count)].GameObject) as GameObject;
 			// tcObject.SetActive(true);

@@ -25,12 +25,6 @@
 		[SerializeField]
 		public Track Track2;
 
-		[SerializeField]
-		public Track Track3;
-
-		[SerializeField]
-		public Track Track4;
-
 		#endregion
 
 

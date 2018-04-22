@@ -78,7 +78,7 @@
 
 		public void Play(string animName) {
 
-			Debug.Log(gameObject.name + " playing anim: " + animName);
+			// Debug.Log(gameObject.name + " playing anim: " + animName);
 		}
 
 		#endregion

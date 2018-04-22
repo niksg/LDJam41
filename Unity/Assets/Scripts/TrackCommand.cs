@@ -10,21 +10,12 @@
 
 	public class TrackCommand : MonoBehaviour, IPoolable {
 
-		#region Serialize Fields
-
-		[SerializeField]
-		private bool m_IsHold;
-
-		[SerializeField]
-		private float m_Duration;
-		
-		[SerializeField]
-		public List<ControlButton> HeldButtons;
-
-		#endregion
-
-
 		#region Public Properties
+
+		public ControlButtonType Type {
+			get;
+			set;
+		}
 
 		public BounceScale BounceScale {
 	       get {
@@ -53,14 +44,6 @@
 		public float Progress {
 			get;
 			set;
-		}
-
-		public bool IsHold {
-			get { return m_IsHold; }
-		}
-
-		public float Duration {
-			get { return m_Duration; }
 		}
 
 		public GameObject GameObject {
@@ -95,10 +78,14 @@
 
 		#region Public Methods
 
-		public void Init(params ControlButton[] heldButtons) {
+		public void Init(ControlButtonType type) {
 
 			this.Progress = 1.0f;
-			this.HeldButtons = new List<ControlButton>(heldButtons);
+			this.Type = type;
+
+			foreach (CommandLetter letter in GetComponentsInChildren<CommandLetter>(true)) {
+				letter.Activate(this.Type);
+			}
 		}
 
 		public void UpdateTrackCommand(float dt) {
@@ -108,26 +95,23 @@
 
 		public bool Check(params ControlButton[] heldButtons) {
 
-			if (this.HeldButtons == null) {
-				return true;
-			}
 
-			if (heldButtons.Length != this.HeldButtons.Count) {
-				return false;
-			}
+			// if (heldButtons.Length != this.HeldButtons.Count) {
+			// 	return false;
+			// }
 
-			int matches = 0;
-			foreach (ControlButton button in this.HeldButtons) {
-				for (int i = 0; i < heldButtons.Length; i++) {
-					if (button.Type == heldButtons[i].Type) {
-						matches++;
-					}
-				}
-			}
+			// int matches = 0;
+			// foreach (ControlButton button in this.HeldButtons) {
+			// 	for (int i = 0; i < heldButtons.Length; i++) {
+			// 		if (button.Type == heldButtons[i].Type) {
+			// 			matches++;
+			// 		}
+			// 	}
+			// }
 
-			if (matches == this.HeldButtons.Count) {
-				return true;
-			}
+			// if (matches == this.HeldButtons.Count) {
+			// 	return true;
+			// }
 
 			return false;
 		}
