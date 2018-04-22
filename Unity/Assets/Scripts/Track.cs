@@ -34,6 +34,9 @@
 		[SerializeField]
 		public Transform TrackEnd;
 
+		[SerializeField]
+		public GameObject TrackDot;
+
 		[Header("Activation")]
 
 		[SerializeField]
@@ -152,7 +155,7 @@
 			command.GameObject.transform.parent = transform;
 			command.Progress = 1.0f;
 			this.TrackCommands.Add(command);
-			SetCommandPosition(command);
+			SetCommandPosition(command, true);
 		}
 
 		#endregion
@@ -160,7 +163,7 @@
 
 		#region Private Methods
 
-		private void SetCommandPosition(TrackCommand tc) {
+		private void SetCommandPosition(TrackCommand tc, bool immediate = false) {
 
 			Vector2 targetPos;
 			if (tc.Progress >= 0) {
@@ -170,7 +173,12 @@
 				targetPos = Vector2.Lerp(this.TrackStart.position - (this.TrackEnd.position - this.TrackStart.position), this.TrackStart.position, tc.Progress + 1.0f);
 			}
 
-			tc.Position += (targetPos - tc.Position) * 0.2f;
+			if (immediate) {
+				tc.Position = targetPos;
+			}
+			else {
+				tc.Position += (targetPos - tc.Position) * 0.2f;
+			}
 		}
 
 		private void CheckFailure(TrackCommand tc) {
@@ -216,6 +224,17 @@
 
 
 		#region Monobehaviour
+
+		private void Awake() {
+
+			for (int i = 1; i < 8; i++) {
+				GameObject newDot = Instantiate(this.TrackDot) as GameObject;
+				newDot.transform.parent = transform;
+				newDot.transform.position = Vector2.Lerp(this.TrackStart.position, this.TrackEnd.position, i / 8.0f);
+			}
+
+			this.TrackDot.gameObject.SetActive(false);
+		}
 
 		private void OnEnable() {
 

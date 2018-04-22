@@ -75,14 +75,14 @@
 		public void PlayerStrike() {
 
 			this.PlayerCharacter.Play("Punch");
-			this.EnemyCharacter.TakeDamage(1.0f);
+			// this.EnemyCharacter.TakeDamage(1.0f);
 			this.EnemyCharacter.Play("TookHit");
 		}
 
 		public void EnemyStrike() {
 		
 			this.EnemyCharacter.Play("Punch");
-			this.PlayerCharacter.TakeDamage(1.0f);
+			// this.PlayerCharacter.TakeDamage(1.0f);
 			this.PlayerCharacter.Play("TookHit");
 		}
 
