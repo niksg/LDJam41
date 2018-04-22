@@ -45,6 +45,11 @@
 			set;
 		}
 
+		private float LossAmount {
+			get;
+			set;
+		}
+
 		private float TargetAmount {
 			get;
 			set;
@@ -58,6 +63,7 @@
 		private void OnEnable() {
 
 			this.Character.OnHealthChanged += UpdateTargetHealth;
+			UpdateTargetHealth(this.Character);
 		}
 
 		private void OnDisable() {
@@ -90,6 +96,9 @@
 			
 			this.CurrentAmount += (this.TargetAmount - this.CurrentAmount) * this.Response;
 			this.CurrentAmount = Mathf.Clamp01(this.CurrentAmount);
+
+			this.LossAmount += (this.TargetAmount - this.LossAmount) * this.Response * 0.5f;
+			this.LossAmount = Mathf.Clamp01(this.LossAmount);
 		}
 
 		private void UpdateScale() {
@@ -97,6 +106,10 @@
 			Vector3 scale = this.HealthMeter.localScale;
 			scale.x = this.CurrentAmount;
 			this.HealthMeter.localScale = scale;
+
+			scale = this.HealthMeterBackground.localScale;
+			scale.x = this.LossAmount;
+			this.HealthMeterBackground.localScale = scale;
 		}
 
 		#endregion
