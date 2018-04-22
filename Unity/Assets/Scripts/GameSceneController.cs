@@ -100,7 +100,17 @@
 
 		private void SpawnCommand() {
 
-			this.TrackManager.Tracks[Random.Range(0, this.TrackManager.Tracks.Count)].Add(this.CommandManager.GetRandomCommand());
+			TrackCommand nextCommand = this.CommandManager.GetNext();
+			if (nextCommand == null) {
+				return;
+			}
+
+			bool uppcase = Random.Range(0, 10) < 3;
+			if (uppcase) {
+				this.TrackManager.Track1.Add(nextCommand);
+			} else {
+				this.TrackManager.Track2.Add(nextCommand);
+			}
 		}
 
 		private void EndRound(Character character) {

@@ -1017,7 +1017,7 @@ Transform:
   - {fileID: 669252905}
   - {fileID: 1263047317}
   m_Father: {fileID: 2059635974}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &431583849
 MonoBehaviour:
@@ -1032,7 +1032,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Speed: 0.5
   m_Rate: 0.5
-  Track1: {fileID: 0}
+  Track1: {fileID: 669252906}
   Track2: {fileID: 1263047318}
 --- !u!1 &433080836
 GameObject:
@@ -1161,6 +1161,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7bf54c82409b145b1a53359f8d9577b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ComboManager: {fileID: 1324435130}
 --- !u!4 &439497256
 Transform:
   m_ObjectHideFlags: 0
@@ -5267,6 +5268,12 @@ Transform:
   m_PrefabParentObject: {fileID: 4584938696507458, guid: 08fa3995395b44cf9bb4c0e5336e3207,
     type: 2}
   m_PrefabInternal: {fileID: 892287774}
+--- !u!114 &669252906 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114990870633628510, guid: 08fa3995395b44cf9bb4c0e5336e3207,
+    type: 2}
+  m_PrefabInternal: {fileID: 892287774}
+  m_Script: {fileID: 11500000, guid: 5659fca515d604758898cb75c75ef29a, type: 3}
 --- !u!1001 &752064527
 Prefab:
   m_ObjectHideFlags: 0
@@ -10130,7 +10137,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2059635974}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1324435130
 MonoBehaviour:
@@ -10143,7 +10150,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fd5eccb63def4b8691599a65643554a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Combos: []
+  Combos:
+  - testing out combo stuff
+  - does this work
+  - i hope so
+  - hello how are you doing
+  - what the actual heck is going on
 --- !u!1 &1452223996
 GameObject:
   m_ObjectHideFlags: 0
@@ -10993,8 +11005,8 @@ Transform:
   - {fileID: 446598371}
   - {fileID: 257215643}
   - {fileID: 439497256}
-  - {fileID: 431583848}
   - {fileID: 1324435129}
+  - {fileID: 431583848}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

@@ -4,20 +4,20 @@
 	using System.Collections;
 	using System.Collections.Generic;
 	using NikCore;
-	using System;
 
-	[Serializable]
-	public class Combo {
+	// [Serializable]
+	// public class Combo {
 		
-		public List<TrackCommand> ComboCommands;
-	}
+	// 	[SerializeField]
+	// 	public string ComboString;
+	// }
 
 	public class ComboManager : MonoBehaviour {
 
 		#region Serialized Fields
 
 		[SerializeField]
-		public List<Combo> Combos;
+		public List<string> Combos;
 
 		#endregion
 
@@ -34,11 +34,11 @@
 
 		#endregion
 
-		
+
 		#region Fields
 
 
-        #endregion
+		#endregion
 
 
 		#region Monobehaviour
@@ -50,7 +50,10 @@
 
 		#region Public Methods
 
+		public string GetCombo(int level) {
 
+			return this.Combos[Random.Range(0, this.Combos.Count)];
+		}
 
 		#endregion
 
