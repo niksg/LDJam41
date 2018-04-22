@@ -5,6 +5,7 @@
 	using System.Collections.Generic;
 	using NikCore;
 	using NikInput;
+	using NikUtils;
 
 	public class TrackCommand : MonoBehaviour, ITrackCommand {
 
@@ -23,6 +24,13 @@
 
 
 		#region Public Properties
+
+		public BounceScale BounceScale {
+	       get {
+		      m_BounceScale = m_BounceScale ?? GetComponent<BounceScale>();
+		      return m_BounceScale;
+	       }
+        }
 
 		public Vector2 Position {
 			get { return (Vector2)transform.position; }
@@ -52,6 +60,28 @@
 		}
 
 		#endregion
+
+
+		#region Fields
+
+		private BounceScale m_BounceScale;
+
+        #endregion
+
+
+		#region Monobehaviour
+
+        private void OnEnable() {
+			
+			this.BounceScale.OnFinishedBounce += Die;
+		}
+
+		private void OnDisable() {
+			
+			this.BounceScale.OnFinishedBounce -= Die;
+		}
+
+        #endregion
 
 
 		#region Public Methods
@@ -94,14 +124,22 @@
 		}
 
 		public void Miss() {
-			gameObject.SetActive(false);
+
+			this.BounceScale.SetTargetScale(Vector3.zero);
 		}
 
 		public void Hit() {
-			gameObject.SetActive(false);
+
+			this.BounceScale.SetTargetScale(Vector3.zero);
 		}
 
 		public void Fail() {
+
+			this.BounceScale.SetTargetScale(Vector3.zero);
+		}
+
+		private void Die() {
+
 			gameObject.SetActive(false);
 		}
 
