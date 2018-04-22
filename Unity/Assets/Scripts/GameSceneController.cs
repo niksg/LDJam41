@@ -17,6 +17,9 @@
 		[SerializeField]
 		public CommandManager CommandManager;
 
+		[SerializeField]
+		public CharacterManager CharacterManager;
+
 		#endregion
 
 
@@ -39,17 +42,39 @@
 
 		#region Monobehaviour
 
+		private void Awake() {
+
+			foreach (Track t in this.TrackManager.Tracks) {
+				t.OnHit += OnHit;
+				t.OnMiss += OnMiss;
+				t.OnFail += OnFail;
+			}
+		}
+
+		private void OnHit(Track track, ITrackCommand trackCommand) {
+
+			this.CharacterManager.PlayerStrike();
+		}
+
+		private void OnMiss(Track track, ITrackCommand trackCommand) {
+
+			this.CharacterManager.EnemyStrike();
+		}
+
+		private void OnFail(Track track, ITrackCommand trackCommand) {
+
+			this.CharacterManager.EnemyStrike();
+		}
+
 		private void Update() {
 			
 			this.TotalTime += Time.deltaTime;
-
-			if (this.TotalTime > this.Rate) {
+			if (this.TotalTime >= this.Rate) {
 				this.TotalTime -= this.Rate;
 				SpawnCommand();
 			}
 
 			this.TrackManager.UpdateTrackManager();
-			// this.CommandManager.UpdateCommandManager();
 		}
 
 		#endregion
