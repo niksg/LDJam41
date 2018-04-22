@@ -162,12 +162,15 @@
 
 		private void SetCommandPosition(ITrackCommand tc) {
 
+			Vector2 targetPos;
 			if (tc.Progress >= 0) {
-				tc.Position = Vector2.Lerp(this.TrackStart.position, this.TrackEnd.position, tc.Progress);
+				targetPos = Vector2.Lerp(this.TrackStart.position, this.TrackEnd.position, tc.Progress);
 			}
 			else {
-				tc.Position = Vector2.Lerp(this.TrackStart.position - (this.TrackEnd.position - this.TrackStart.position), this.TrackStart.position, tc.Progress + 1.0f);
+				targetPos = Vector2.Lerp(this.TrackStart.position - (this.TrackEnd.position - this.TrackStart.position), this.TrackStart.position, tc.Progress + 1.0f);
 			}
+
+			tc.Position += (targetPos - tc.Position) * 0.2f;
 		}
 
 		private void CheckFailure(ITrackCommand tc) {

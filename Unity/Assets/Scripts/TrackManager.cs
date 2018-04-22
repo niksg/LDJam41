@@ -9,11 +9,6 @@
 
 		#region Serialized Fields
 
-		[Header("Managers")]
-
-		[SerializeField]
-		public CommandManager CommandManager;
-
 		[Header("Difficulty")]
 
 		[SerializeField]
@@ -61,11 +56,6 @@
 			get { return m_Rate; }
 		}
 
-		private float TotalTime {
-			get;
-			set;
-		}
-
 		#endregion
 
 		
@@ -76,26 +66,12 @@
         #endregion
 
 
-		#region Monobehaviour
-
-		private void Update() {
-
-			this.TotalTime += Time.deltaTime;
-
-			UpdateTracks();
-
-			if (this.TotalTime > this.Rate) {
-				this.TotalTime -= this.Rate;
-				SpawnCommand();
-			}
-		}
-
-		#endregion
-
-
 		#region Public Methods
 
+		public void UpdateTrackManager() {
 
+			UpdateTracks();
+		}
 
 		#endregion
 
@@ -105,13 +81,12 @@
 		private void UpdateTracks() {
 			
 			foreach (Track track in this.Tracks) {
-				track.UpdateTrack(Time.deltaTime * this.Speed);
+				track.UpdateTrack(Time.fixedDeltaTime * this.Speed);
 			}
 		}
 
 		private void SpawnCommand() {
 			
-			this.Tracks[Random.Range(0, this.Tracks.Count)].Add(this.CommandManager.GetRandomCommand());
 		}
 
 		private void AddCombo(Combo combo) {
