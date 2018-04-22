@@ -86,6 +86,10 @@
 			foreach (CommandLetter letter in GetComponentsInChildren<CommandLetter>(true)) {
 				letter.Activate(this.Type);
 			}
+
+			foreach (HitType hitType in GetComponentsInChildren<HitType>(true)) {
+				hitType.Activate(HitTypes.None);
+			}
 		}
 
 		public void UpdateTrackCommand(float dt) {
@@ -119,16 +123,33 @@
 		public void Miss() {
 
 			this.BounceScale.SetTargetScale(Vector3.zero);
+			foreach (HitType hitType in GetComponentsInChildren<HitType>(true)) {
+				hitType.Activate(HitTypes.Miss);
+			}
 		}
 
 		public void Hit() {
 
 			this.BounceScale.SetTargetScale(Vector3.zero);
+			foreach (HitType hitType in GetComponentsInChildren<HitType>(true)) {
+				hitType.Activate(HitTypes.Hit);
+			}
+		}
+
+		public void MistimedHit() {
+
+			this.BounceScale.SetTargetScale(Vector3.zero);
+			foreach (HitType hitType in GetComponentsInChildren<HitType>(true)) {
+				hitType.Activate(HitTypes.Mistimed);
+			}
 		}
 
 		public void Fail() {
 
 			this.BounceScale.SetTargetScale(Vector3.zero);
+			foreach (HitType hitType in GetComponentsInChildren<HitType>(true)) {
+				hitType.Activate(HitTypes.Fail);
+			}
 		}
 
 		private void Die() {

@@ -13,8 +13,7 @@
         public System.Action<Track, TrackCommand> OnHit;
 		public System.Action<Track, TrackCommand> OnMiss;
 		public System.Action<Track, TrackCommand> OnFail;
-		public System.Action<Track, TrackCommand> OnHoldBegan;
-		public System.Action<Track, TrackCommand> OnHoldEnded;
+		public System.Action<Track, TrackCommand> OnMistimed;
 
         #endregion
 
@@ -24,7 +23,7 @@
 		[Header("Button")]
 
 		[SerializeField]
-		public ControlButtonType ModifierKey;
+		public bool IsUpperCase;
 
 		[Header("Limits")]
 
@@ -118,21 +117,30 @@
 
 		public InputResponse OnButtonDown(ControlButton button) {
 
-			Debug.Log("Button Down: " + button.Type);
-
 			for (int i = this.TrackCommands.Count-1; i >= 0; i--) {
 				TrackCommand tc = this.TrackCommands[i];
 				if (tc.Progress < this.EarlyGrace && tc.Progress > this.LateGrace) {
-					if (tc.Type != button.Type) {
+					if (tc.Type != button.Type ) {
 						FailedCommand(tc);
 						return InputResponse.None;
 					}
-					HitCommand(tc);
+					else if (this.IsUpperCase && !Input.GetKey(KeyCode.LeftShift)) {
+						FailedCommand(tc);
+						return InputResponse.None;
+					}
+					else if (!this.IsUpperCase && Input.GetKey(KeyCode.LeftShift)) {
+						FailedCommand(tc);
+						return InputResponse.None;
+					}
+					if (tc.Progress < this.EarlyGrace * 0.85f && tc.Progress > this.LateGrace * -0.85f) {
+						// Debug.Log("PERFECT HIT! " + tc.Progress);
+						HitCommand(tc);
+					}
+					else {
+						// Debug.Log("Mistimed Hit " + tc.Progress);
+						MistimedCommand(tc);
+					}
 				} else if (tc.Progress < this.MissValue) {
-					if (tc.Type != button.Type) {
-						FailedCommand(tc);
-						return InputResponse.None;
-					}
 					MissedCommand(tc);
 				}
 			}
@@ -142,13 +150,6 @@
 
 		public void OnButtonUp(ControlButton button) {
 			
-			if (this.HeldCommand != null) {
-				if (this.OnHoldEnded != null) {
-					OnHoldEnded(this, this.HeldCommand);
-				}
-				this.TrackCommands.Remove(this.HeldCommand);
-				this.HeldCommand = null;
-			}
 		}
 
 		#endregion
@@ -195,7 +196,7 @@
 		}
 
 		private void HitCommand(TrackCommand command) {
-Debug.Log("HitCommand");
+
 			if (this.OnHit != null) {
 				OnHit(this, command);
 			}
@@ -204,8 +205,17 @@ Debug.Log("HitCommand");
 			this.TrackCommands.Remove(command);
 		}
 
+		private void MistimedCommand(TrackCommand command) {
+
+			if (this.OnMistimed != null) {
+				OnMistimed(this, command);
+			}
+			command.MistimedHit();
+			this.TrackCommands.Remove(command);
+		}
+
 		private void MissedCommand(TrackCommand command) {
-			Debug.Log("MissedCommand");
+
 			if (this.OnMiss != null) {
 				OnMiss(this, command);
 			}
@@ -214,7 +224,7 @@ Debug.Log("HitCommand");
 		}
 
 		private void FailedCommand(TrackCommand command) {
-Debug.Log("FailedCommand");
+
 			if (this.OnFail != null) {
 				OnFail(this, command);
 			}

@@ -51,6 +51,7 @@
 
 			foreach (Track t in this.TrackManager.Tracks) {
 				t.OnHit += OnHit;
+				t.OnMistimed += OnHit;
 				t.OnMiss += OnMiss;
 				t.OnFail += OnFail;
 			}
