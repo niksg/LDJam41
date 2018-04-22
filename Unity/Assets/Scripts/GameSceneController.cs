@@ -37,18 +37,25 @@
 			set;
 		}
 
+		private bool RoundOver {
+			get;
+			set;
+		}
+
 		#endregion
 
 
 		#region Monobehaviour
 
-		private void Awake() {
+		private void OnEnable() {
 
 			foreach (Track t in this.TrackManager.Tracks) {
 				t.OnHit += OnHit;
 				t.OnMiss += OnMiss;
 				t.OnFail += OnFail;
 			}
+
+			this.CharacterManager.OnCharacterKnockout += EndRound;
 		}
 
 		private void OnHit(Track track, TrackCommand trackCommand) {
@@ -68,8 +75,11 @@
 
 		private void Update() {
 			
-			UpdateCommandSpawning();
-			this.TrackManager.UpdateTrackManager();
+			if (!this.RoundOver) {
+				UpdateCommandSpawning();
+				this.TrackManager.UpdateTrackManager();
+			}
+
 			this.CharacterManager.UpdateCharacterManager();
 		}
 
@@ -90,6 +100,11 @@
 		private void SpawnCommand() {
 
 			this.TrackManager.Tracks[Random.Range(0, this.TrackManager.Tracks.Count)].Add(this.CommandManager.GetRandomCommand());
+		}
+
+		private void EndRound(Character character) {
+
+			this.RoundOver = true;
 		}
 
 		#endregion

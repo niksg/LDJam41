@@ -7,9 +7,21 @@
 
 	public class CharacterManager : MonoBehaviour {
 
+		#region Actions
+
+        public System.Action<Character> OnCharacterKnockout;
+
+        #endregion
+
+
+
 		#region Serialized Fields
 
+		[SerializeField]
+		public Character PlayerCharacter;
 
+		[SerializeField]
+		public Character EnemyCharacter;
 
 		#endregion
 
@@ -37,6 +49,22 @@
 
 		#region Monobehaviour
 
+		private void OnEnable() {
+			
+			this.PlayerCharacter.OnKnockedOut += CharacterKnockout;
+			this.PlayerCharacter.OnKnockedOut += CharacterKnockout;
+		}
+
+		private void OnDisable() {
+			
+			this.PlayerCharacter.OnKnockedOut -= CharacterKnockout;
+			this.PlayerCharacter.OnKnockedOut -= CharacterKnockout;
+		}
+		#endregion
+
+
+		#region Public Methods
+
 		public void UpdateCharacterManager() {
 
 			foreach (HealthBar hb in this.HealthBars) {
@@ -44,17 +72,18 @@
 			}
 		}
 
-		#endregion
-
-
-		#region Public Methods
-
 		public void PlayerStrike() {
 
+			this.PlayerCharacter.Play("Punch");
+			this.EnemyCharacter.TakeDamage(1.0f);
+			this.EnemyCharacter.Play("TookHit");
 		}
 
 		public void EnemyStrike() {
-			
+		
+			this.EnemyCharacter.Play("Punch");
+			this.PlayerCharacter.TakeDamage(1.0f);
+			this.PlayerCharacter.Play("TookHit");
 		}
 
 		#endregion
@@ -62,7 +91,12 @@
 
 		#region Private Methods
 
+		private void CharacterKnockout(Character character) {
 
+			if (this.OnCharacterKnockout != null) {
+				OnCharacterKnockout(character);
+			}
+		}
 
 		#endregion
 	}
