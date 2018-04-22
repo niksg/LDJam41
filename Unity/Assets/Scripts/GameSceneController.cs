@@ -4,8 +4,16 @@
 	using System.Collections;
 	using System.Collections.Generic;
 	using NikCore;
+	using UnityEngine.SceneManagement;
 
 	public class GameSceneController : MonoBehaviour {
+
+		#region Static Fields
+
+        public static int SceneIndex;
+
+        #endregion
+
 
 		#region Serialized Fields
 
@@ -117,6 +125,17 @@
 
 			Debug.Log("Round Over");
 			this.RoundOver = true;
+
+			StartCoroutine(LoadNextSceneAsync());
+		}
+
+		private IEnumerator LoadNextSceneAsync() {
+
+			yield return new WaitForSeconds(3.0f);
+			// GameSceneController.SceneIndex++;
+
+			Debug.Log("Going to next scene....");
+			SceneManager.LoadSceneAsync("Transition", LoadSceneMode.Additive);
 		}
 
 		#endregion
