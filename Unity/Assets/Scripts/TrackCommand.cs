@@ -6,8 +6,9 @@
 	using NikCore;
 	using NikInput;
 	using NikUtils;
+	using System;
 
-	public class TrackCommand : MonoBehaviour {
+	public class TrackCommand : MonoBehaviour, IPoolable {
 
 		#region Serialize Fields
 
@@ -29,6 +30,13 @@
 	       get {
 		      m_BounceScale = m_BounceScale ?? GetComponent<BounceScale>();
 		      return m_BounceScale;
+	       }
+        }
+
+		public Poolable Poolable {
+	       get {
+		      m_Poolable = m_Poolable ?? GetComponent<Poolable>();
+		      return m_Poolable;
 	       }
         }
 
@@ -65,6 +73,7 @@
 		#region Fields
 
 		private BounceScale m_BounceScale;
+		private Poolable m_Poolable;
 
         #endregion
 
@@ -140,7 +149,13 @@
 
 		private void Die() {
 
-			gameObject.SetActive(false);
+			this.Poolable.Repool();
+		}
+
+		public void Reset() {
+
+			transform.localPosition = Vector3.zero;
+			this.BounceScale.SetTargetScale(Vector3.one, true);
 		}
 
 		#endregion

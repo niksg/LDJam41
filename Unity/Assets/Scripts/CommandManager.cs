@@ -16,6 +16,13 @@
 	       }
         }
 
+		public Pool Pool {
+	       get {
+		      m_Pool = m_Pool ?? GetComponent<Pool>();
+		      return m_Pool;
+	       }
+        }
+
 		#endregion
 
 
@@ -36,6 +43,7 @@
 		#region Fields
 
 		private List<TrackCommand> m_TrackCommands;
+        private Pool m_Pool;
 
         #endregion
 
@@ -51,10 +59,14 @@
 
 		public TrackCommand GetRandomCommand() {
 
-			GameObject tcObject = Instantiate(this.TrackCommands[Random.Range(0, this.TrackCommands.Count)].GameObject) as GameObject;
-			tcObject.SetActive(true);
+			Poolable poolable = this.Pool.Get();
+			TrackCommand tc = poolable.GetComponent<TrackCommand>();
+			tc.Reset();
+			return tc;
+			// GameObject tcObject = Instantiate(this.TrackCommands[Random.Range(0, this.TrackCommands.Count)].GameObject) as GameObject;
+			// tcObject.SetActive(true);
 			
-			return tcObject.GetComponent<TrackCommand>();
+			// return tcObject.GetComponent<TrackCommand>();
 		}
 
 		#endregion
