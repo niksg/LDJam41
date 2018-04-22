@@ -67,6 +67,9 @@
 
 		public void UpdateCharacterManager() {
 
+			this.PlayerCharacter.UpdateCharacter();
+			this.EnemyCharacter.UpdateCharacter();
+			
 			foreach (HealthBar hb in this.HealthBars) {
 				hb.UpdateHealthBar();
 			}
@@ -74,16 +77,16 @@
 
 		public void PlayerStrike() {
 
-			this.PlayerCharacter.Play("Punch");
-			// this.EnemyCharacter.TakeDamage(1.0f);
-			this.EnemyCharacter.Play("TookHit");
+			this.PlayerCharacter.Punch();
+			this.EnemyCharacter.TakeDamage(.01f);
+			this.EnemyCharacter.TakeHit();
 		}
 
 		public void EnemyStrike() {
 		
-			this.EnemyCharacter.Play("Punch");
-			// this.PlayerCharacter.TakeDamage(1.0f);
-			this.PlayerCharacter.Play("TookHit");
+			this.EnemyCharacter.Punch();
+			this.PlayerCharacter.TakeDamage(.01f);
+			this.PlayerCharacter.TakeHit();
 		}
 
 		#endregion
