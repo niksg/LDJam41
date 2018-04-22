@@ -82,6 +82,10 @@
 
 		#region Private Properties
 
+		private bool IsAlive {
+			get { return m_CurrentHealth > 0; }
+		}
+
 		private float m_CurrentHealth;
 
 		#endregion
@@ -101,15 +105,17 @@
 
 		public void UpdateCharacter() {
 
-			this.Head.AddForce(Random.insideUnitCircle * this.JiggleForce * Time.deltaTime);
-			this.Body.AddForce(Random.insideUnitCircle * this.JiggleForce * Time.deltaTime);
-			this.LeftHand.AddForce(Random.insideUnitCircle * this.JiggleForce * Time.deltaTime);
-			this.RightHand.AddForce(Random.insideUnitCircle * this.JiggleForce * Time.deltaTime);
+			if (this.IsAlive) {
+				this.Head.AddForce(Random.insideUnitCircle * this.JiggleForce * Time.deltaTime);
+				this.Body.AddForce(Random.insideUnitCircle * this.JiggleForce * Time.deltaTime);
+				this.LeftHand.AddForce(Random.insideUnitCircle * this.JiggleForce * Time.deltaTime);
+				this.RightHand.AddForce(Random.insideUnitCircle * this.JiggleForce * Time.deltaTime);
+			}
 
-			this.Head.UpdateBodyPart();
-			this.Body.UpdateBodyPart();
-			this.LeftHand.UpdateBodyPart();
-			this.RightHand.UpdateBodyPart();
+			this.Head.UpdateBodyPart(this.IsAlive);
+			this.Body.UpdateBodyPart(this.IsAlive);
+			this.LeftHand.UpdateBodyPart(this.IsAlive);
+			this.RightHand.UpdateBodyPart(this.IsAlive);
 		}
 
 		public void TakeDamage(float amount) {
@@ -147,10 +153,17 @@
 			force.x = this.KnockbackForce;
 
 			// this.Body.AddForce(Random.insideUnitCircle);
-			this.Head.AddForce(force);
-			this.Body.AddForce(force * 0.75f);
-			// this.LeftHand.AddForce(Random.insideUnitCircle);
-			// this.RightHand.AddForce(Random.insideUnitCircle);
+			if (this.IsAlive) {
+				this.Head.AddForce(force);
+				this.Body.AddForce(force * 0.75f);
+			}
+			else {
+				force = Vector2.right * this.KnockbackForce * 0.1f;
+				this.Head.AddForce(force);
+				this.Body.AddForce(force);
+				this.LeftHand.AddForce(force);
+				this.RightHand.AddForce(force);
+			}
 
 			this.HitParticles.Play();
 		}

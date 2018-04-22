@@ -105,6 +105,7 @@
 
 		private void EndRound(Character character) {
 
+			Debug.Log("Round Over");
 			this.RoundOver = true;
 		}
 

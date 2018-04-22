@@ -52,13 +52,13 @@
 		private void OnEnable() {
 			
 			this.PlayerCharacter.OnKnockedOut += CharacterKnockout;
-			this.PlayerCharacter.OnKnockedOut += CharacterKnockout;
+			this.EnemyCharacter.OnKnockedOut += CharacterKnockout;
 		}
 
 		private void OnDisable() {
 			
 			this.PlayerCharacter.OnKnockedOut -= CharacterKnockout;
-			this.PlayerCharacter.OnKnockedOut -= CharacterKnockout;
+			this.EnemyCharacter.OnKnockedOut -= CharacterKnockout;
 		}
 		#endregion
 
@@ -69,7 +69,7 @@
 
 			this.PlayerCharacter.UpdateCharacter();
 			this.EnemyCharacter.UpdateCharacter();
-			
+
 			foreach (HealthBar hb in this.HealthBars) {
 				hb.UpdateHealthBar();
 			}
@@ -78,14 +78,14 @@
 		public void PlayerStrike() {
 
 			this.PlayerCharacter.Punch();
-			this.EnemyCharacter.TakeDamage(.01f);
+			this.EnemyCharacter.TakeDamage(1);
 			this.EnemyCharacter.TakeHit();
 		}
 
 		public void EnemyStrike() {
 		
 			this.EnemyCharacter.Punch();
-			this.PlayerCharacter.TakeDamage(.01f);
+			this.PlayerCharacter.TakeDamage(1);
 			this.PlayerCharacter.TakeHit();
 		}
 

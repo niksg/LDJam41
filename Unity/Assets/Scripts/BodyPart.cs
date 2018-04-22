@@ -30,6 +30,10 @@
 	       }
         }
 
+		private float GroundY {
+			get { return -1.0f; }
+		}
+
         private Movable m_Movable;
 
 		#endregion
@@ -57,7 +61,18 @@
 
 		#region Public Methods
 
-		public void UpdateBodyPart() {
+		public void UpdateBodyPart(bool isDead) {
+
+			if (!isDead) {
+				transform.eulerAngles += Vector3.forward * this.Movable.Velocity.x * -20;
+				this.Movable.Velocity -= Vector2.up * 0.01f;
+				this.Movable.ApplyVelocity();
+				if (this.Movable.Position.y < this.GroundY && this.Movable.Velocity.y < 0) {
+					this.Movable.Position = new Vector2(this.Movable.Position.x, this.GroundY);
+					this.Movable.Velocity = new Vector2(this.Movable.Velocity.x * 0.4f, -this.Movable.Velocity.y * 0.8f);
+				}
+				return;
+			}
 
 			this.Movable.Velocity += (this.StartPosition - this.Movable.Position) * this.Response;
 			this.Movable.ApplyVelocity();
