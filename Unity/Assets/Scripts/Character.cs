@@ -86,6 +86,16 @@
 			get { return m_CurrentHealth > 0; }
 		}
 
+		private bool HasWon {
+			get;
+			set;
+		}
+
+		private float WinTime {
+			get;
+			set;
+		}
+
 		private float m_CurrentHealth;
 
 		#endregion
@@ -104,6 +114,19 @@
 		#region Public Methods
 
 		public void UpdateCharacter() {
+
+			if (this.HasWon) {
+				this.WinTime += Time.deltaTime;
+				if (this.WinTime > 1.0f) {
+					this.Head.transform.localScale = new Vector3(-this.Head.transform.localScale.x, this.Head.transform.localScale.y, 1.0f);
+					this.WinTime -= 1.0f;
+				}
+				this.Head.UpdateWin();
+				this.Body.UpdateWin();
+				this.LeftHand.UpdateWin();
+				this.RightHand.UpdateWin();
+				return;
+			}
 
 			if (this.IsAlive) {
 				this.Head.AddForce(Random.insideUnitCircle * this.JiggleForce * Time.deltaTime);
@@ -166,6 +189,11 @@
 			}
 
 			this.HitParticles.Play();
+		}
+
+		public void DeclareWinner() {
+
+			this.HasWon = true;
 		}
 
 		#endregion

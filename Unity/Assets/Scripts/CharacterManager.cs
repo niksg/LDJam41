@@ -53,6 +53,9 @@
 			
 			this.PlayerCharacter.OnKnockedOut += CharacterKnockout;
 			this.EnemyCharacter.OnKnockedOut += CharacterKnockout;
+			
+			this.EnemyCharacter.OnKnockedOut += PlayerWon;
+			this.PlayerCharacter.OnKnockedOut += EnemyWon;
 		}
 
 		private void OnDisable() {
@@ -93,6 +96,18 @@
 
 
 		#region Private Methods
+
+		private void PlayerWon(Character character) {
+
+			GameSceneController.SceneIndex++;
+			this.PlayerCharacter.DeclareWinner();
+		}
+
+		private void EnemyWon(Character character) {
+
+			GameSceneController.SceneIndex = 1;
+			this.EnemyCharacter.DeclareWinner();
+		}
 
 		private void CharacterKnockout(Character character) {
 

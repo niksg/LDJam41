@@ -333,8 +333,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5659fca515d604758898cb75c75ef29a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Button:
-    m_Type: 0
+  IsUpperCase: 0
   TrackStart: {fileID: 4812371932242926}
   TrackEnd: {fileID: 4075411214391452}
   TrackDot: {fileID: 1359972096357332}
@@ -342,6 +341,7 @@ MonoBehaviour:
   EarlyGrace: 0.05
   LateGrace: -0.25
   MissValue: -0.5
+  Bouncer: {fileID: 0}
 --- !u!212 &212352317965283534
 SpriteRenderer:
   m_ObjectHideFlags: 1

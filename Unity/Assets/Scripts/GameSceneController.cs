@@ -60,6 +60,10 @@
 
 		private void OnEnable() {
 
+			if (GameSceneController.SceneIndex == 0) {
+				GameSceneController.SceneIndex = 1;
+			}
+
 			this.AudioManager.OnMusicStarted += SubscribeToBeats;
 
 			foreach (Track t in this.TrackManager.Tracks) {
@@ -70,6 +74,20 @@
 			}
 
 			this.CharacterManager.OnCharacterKnockout += EndRound;
+		}
+
+		private void OnDisable() {
+
+			this.AudioManager.OnMusicStarted -= SubscribeToBeats;
+
+			foreach (Track t in this.TrackManager.Tracks) {
+				t.OnHit -= OnHit;
+				t.OnMistimed -= OnHit;
+				t.OnMiss -= OnMiss;
+				t.OnFail -= OnFail;
+			}
+
+			this.CharacterManager.OnCharacterKnockout -= EndRound;
 		}
 
 		private void Start() {
@@ -147,6 +165,8 @@
 
 		private void EndRound(Character character) {
 
+			this.CharacterManager.OnCharacterKnockout -= EndRound;
+
 			Debug.Log("Round Over");
 			this.RoundOver = true;
 
@@ -155,7 +175,18 @@
 
 		private IEnumerator LoadNextSceneAsync() {
 
-			yield return new WaitForSeconds(3.0f);
+			bool pressed;
+			pressed = false;
+			
+			float dt = 0;
+
+			while(!pressed || dt < 3.0f) {
+				if (dt > 1.0f && Input.anyKeyDown) {
+					pressed = true;
+				}
+				dt += Time.deltaTime;
+				yield return null;
+			}
 			// GameSceneController.SceneIndex++;
 
 			Debug.Log("Going to next scene....");

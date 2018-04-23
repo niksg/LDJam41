@@ -140,6 +140,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc7711bc6a7544cb3899186d92f35c55, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MinLoadingTime: 1
   TransitionAnimation: {fileID: 1531947336}
 --- !u!4 &846886080
 Transform:
@@ -325,8 +326,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1953451624}
   - component: {fileID: 1953451623}
-  - component: {fileID: 1953451622}
-  - component: {fileID: 1953451621}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -334,20 +333,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!81 &1953451621
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1953451620}
-  m_Enabled: 1
---- !u!124 &1953451622
-Behaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1953451620}
-  m_Enabled: 1
 --- !u!20 &1953451623
 Camera:
   m_ObjectHideFlags: 0

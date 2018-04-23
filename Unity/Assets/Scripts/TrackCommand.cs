@@ -12,6 +12,8 @@
 
 		#region Public Properties
 
+	public bool Logging;
+
 		public ControlButtonType Type {
 			get;
 			set;
@@ -95,29 +97,10 @@
 		public void UpdateTrackCommand(float dt) {
 
 			this.Progress -= dt;
-		}
 
-		public bool Check(params ControlButton[] heldButtons) {
-
-
-			// if (heldButtons.Length != this.HeldButtons.Count) {
-			// 	return false;
-			// }
-
-			// int matches = 0;
-			// foreach (ControlButton button in this.HeldButtons) {
-			// 	for (int i = 0; i < heldButtons.Length; i++) {
-			// 		if (button.Type == heldButtons[i].Type) {
-			// 			matches++;
-			// 		}
-			// 	}
-			// }
-
-			// if (matches == this.HeldButtons.Count) {
-			// 	return true;
-			// }
-
-			return false;
+			if (this.Logging) {
+				Debug.Log("Progress: " + this.Progress);
+			}
 		}
 
 		public void Miss() {

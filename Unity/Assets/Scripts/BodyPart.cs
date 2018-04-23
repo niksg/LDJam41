@@ -10,6 +10,16 @@
 
 		#region Serialized Fields
 
+		[Header("Winning")]
+
+		[SerializeField]
+		public Transform WinPosition;
+
+		[SerializeField]
+		public float WinRotation;
+
+		[Header("Feel")]
+
 		[SerializeField]
 		[Range(0, 1)]
 		public float Response;
@@ -75,6 +85,20 @@
 			}
 
 			this.Movable.Velocity += (this.StartPosition - this.Movable.Position) * this.Response;
+			this.Movable.ApplyVelocity();
+			this.Movable.Velocity *= (1.0f - this.Damping);
+		}
+
+		public void UpdateWin() {
+
+			Vector2 winPos = this.StartPosition;
+			if (this.WinPosition != null) {
+				winPos = this.WinPosition.position;
+			}
+
+			transform.eulerAngles = Vector3.forward * this.WinRotation * Mathf.Sin(Time.time * 2.0f);
+
+			this.Movable.Velocity += (winPos - this.Movable.Position) * this.Response;
 			this.Movable.ApplyVelocity();
 			this.Movable.Velocity *= (1.0f - this.Damping);
 		}
