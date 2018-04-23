@@ -468,7 +468,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: b4e1d513b403d420487c499221f00b84, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 7660cbc7750ff4297827f975fb65f512, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.105
   m_Pitch: 1
@@ -676,7 +676,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 5982e2ef36b1043dd9341472c60db554, type: 3}
+  m_audioClip: {fileID: 8300000, guid: f6dc56953c9d44bccb7c8deb7c809963, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.105
   m_Pitch: 1
@@ -1252,7 +1252,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.3287197, g: 0.60671455, b: 0.6985294, a: 0}
+  m_BackGroundColor: {r: 0.8235294, g: 0.5147059, b: 0.5147059, a: 0}
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
@@ -1908,13 +1908,13 @@ Prefab:
         type: 2}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 213380284394728648, guid: d42af1cb913cf48658881a9fe2ede63c,
+      objectReference: {fileID: 213400404224874484, guid: c0f6776c40a944c639d2420287c912b8,
         type: 2}
     - target: {fileID: 114458111407927892, guid: b745af6f9f5034d41932473a1ef5a5f0,
         type: 2}
       propertyPath: m_File
       value: 
-      objectReference: {fileID: 11400000, guid: d42af1cb913cf48658881a9fe2ede63c,
+      objectReference: {fileID: 11400000, guid: c0f6776c40a944c639d2420287c912b8,
         type: 2}
     - target: {fileID: 212309223661275404, guid: b745af6f9f5034d41932473a1ef5a5f0,
         type: 2}
@@ -2046,7 +2046,7 @@ Prefab:
     - target: {fileID: 114047223458693382, guid: b745af6f9f5034d41932473a1ef5a5f0,
         type: 2}
       propertyPath: m_MaxHealth
-      value: 30
+      value: 35
       objectReference: {fileID: 0}
     - target: {fileID: 4697305707814050, guid: b745af6f9f5034d41932473a1ef5a5f0, type: 2}
       propertyPath: m_RootOrder
@@ -2135,7 +2135,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MusicTrack: {fileID: 1948563940}
   BPM: 120
-  BPS: 2
+  BPS: 1
 --- !u!4 &678187224
 Transform:
   m_ObjectHideFlags: 0
@@ -2765,7 +2765,7 @@ Prefab:
     - target: {fileID: 114047223458693382, guid: b745af6f9f5034d41932473a1ef5a5f0,
         type: 2}
       propertyPath: m_MaxHealth
-      value: 15
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 212065765926090890, guid: b745af6f9f5034d41932473a1ef5a5f0,
         type: 2}
@@ -2814,7 +2814,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: a9dc09b681da94111a33537c7cda196a, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 79d2f6ffd47f1438e8c90a144181197d, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.105
   m_Pitch: 1
@@ -3027,7 +3027,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 40380347ac9f240c1ae1d9bc87d31e07, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 7c5e6fc90bed045f2b12f67b4c100251, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.105
   m_Pitch: 1
@@ -3774,14 +3774,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Combos:
-  - do you like this song
-  - i made it in like two seconds
-  - soon the words will get hard
-  - i had to look some hard words up for later
-  - pls leave a comment
-  - i like comments
-  - even if you hate this thanks
-  - hows it going let me know
+  - acrimony
+  - angst
+  - baroque
+  - bourgeois
+  - Byzantine
+  - capricious
+  - euphemism
+  - ostracize
 --- !u!1 &1333032739
 GameObject:
   m_ObjectHideFlags: 0
@@ -3820,7 +3820,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: dfa17c06cdfb942a2a6b9c0fe87a3ddc, type: 3}
+  m_audioClip: {fileID: 8300000, guid: d7a67cbf1602845dd8891f678c33e292, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.105
   m_Pitch: 1
@@ -3961,7 +3961,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: f9f2c763ec36141a18f3e75250094522, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 400bea92154ec47918c8760270529116, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.105
   m_Pitch: 1
@@ -4799,7 +4799,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 68e2d5064f3df47cfad308e5a8011a91, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 6e0a543d0a20445898c03bad4d988416, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.105
   m_Pitch: 1
@@ -4989,7 +4989,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 7f6ccc08930da4cf4a0a202f3f8cec3e, type: 3}
+  m_audioClip: {fileID: 8300000, guid: cea5c0904a32142fda4d663b16ecfdee, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.249
   m_Pitch: 1
@@ -5111,7 +5111,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 293bef94b291c48138262bab8b9ae70b, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 805f8eccda0c34a37965d6c01c44057f, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.105
   m_Pitch: 1
