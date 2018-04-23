@@ -126,7 +126,11 @@
 
 		private void OnHit(Track track, TrackCommand trackCommand) {
 
-			this.CharacterManager.PlayerStrike();
+			int dmg = 1;
+			if (Mathf.Abs(trackCommand.Progress) < 0.01f) {
+				dmg = 2;
+			}
+			this.CharacterManager.PlayerStrike(dmg);
 		}
 
 		private void OnMiss(Track track, TrackCommand trackCommand) {

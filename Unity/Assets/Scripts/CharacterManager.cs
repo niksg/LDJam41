@@ -78,10 +78,10 @@
 			}
 		}
 
-		public void PlayerStrike() {
+		public void PlayerStrike(int dmg) {
 
 			this.PlayerCharacter.Punch();
-			this.EnemyCharacter.TakeDamage(1);
+			this.EnemyCharacter.TakeDamage(dmg);
 			this.EnemyCharacter.TakeHit();
 		}
 
